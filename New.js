@@ -8,6 +8,12 @@ import * as actionCreators from './actions/todo'
 class New extends Component {
   constructor(props) {
     super(props)
+
+    // React state
+    this.state = {
+      todo: ''
+    }
+
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
@@ -18,9 +24,12 @@ class New extends Component {
     e.preventDefault()
     console.log(this.props)
     this.props.addTodo(this.state.todo)
+    this.setState({todo: ''})
   }
 
   render() {
+    const { todos } = this.props
+
     return (
       <div>
         <form ref="todoForm" onSubmit={this.handleSubmit}>
@@ -31,9 +40,12 @@ class New extends Component {
             placeholder='I need to do....' 
             name="todo" 
             onChange={this.handleChange} 
+            value={this.state.todo}
           />
         </form>
-        <pre>{JSON.stringify(this.props)}</pre>
+        <ul>
+          {todos.map(d => <li>{d.todo}</li>)}
+        </ul>
       </div>
     )
   }
