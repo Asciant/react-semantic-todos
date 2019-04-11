@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
+import { Provider } from "react-redux"
+import store from './store/store'
+
 import { 
   Container,
   Header
@@ -11,18 +14,17 @@ import New from './New'
 class App extends Component {
   constructor() {
     super();
-    this.state = {
-      todos: []
-    };
   }
 
   render() {
     return (
-      <Container text style={{ marginTop: '1em' }}>
-      <New />
-      <Header as='h1'>Semantic UI React Fixed Template</Header>
-      <p>This is a base react app using Semantic UI.</p>
-      </Container>
+      <Provider store={store}>
+        <Container text style={{ marginTop: '1em' }}>
+          <New />
+          <Header as='h1'>Semantic UI React Fixed Template</Header>
+          <p>This is a base react app using Semantic UI.</p>
+        </Container>
+      </Provider>
     );
   }
 }

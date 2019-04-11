@@ -1,46 +1,43 @@
 import React, { Component } from "react"
-import { Input } from 'semantic-ui-react'
+import { Form, Input } from 'semantic-ui-react'
+
+import { bindActionCreators } from "redux"
+import { connect } from "react-redux"
+import * as actionCreators from './actions/todo'
 
 class New extends Component {
   constructor() {
     super()
-
-    this.state= {
-      todos: [],
-      todo: ''
-    }
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this)
   }
 
-  handleChange = (e, { name, value }) => this.setState({ [name]: value })
-
-  handleSubmit = (e) => {
-    e.preventDefault()
-    const todo = this.state.todo
-    this.setState((prevState) => {
-      const todos = prevState.todos
-      todos.push(prevState.todo)
-      return { 
-        todos: todos,
-        todo: ''
-      }
-    })
-  }
+  handleChange = (e, { name, value }) => console.log(this.props)
 
   render() {
-   const { todo } = this.state
-
     return (
       <div>
-        <form ref="todoForm" onSubmit={this.handleSubmit}>
-          <Input size='large' fluid focus placeholder='I need to do....' name="todo" value={todo} onChange={this.handleChange} />
-        </form>
-        <pre>{JSON.stringify(this.state)}</pre>
+          <Form.Input 
+            size='large' 
+            fluid 
+            focus 
+            placeholder='I need to do....' 
+            name="todo" 
+            onChange={this.handleChange} 
+          />
+        <pre>{JSON.stringify(this.props)}</pre>
       </div>
     )
   }
 }
 
-export default New
+function mapStateToProps(state) {
+  return {
+    todos: state.todos,
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(actionCreators, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(New)
