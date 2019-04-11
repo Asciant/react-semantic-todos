@@ -9,7 +9,7 @@ import {
   } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 
-import New from './New'
+import New from './components/New'
 
 class App extends Component {
   constructor() {
@@ -21,9 +21,6 @@ class App extends Component {
       <Provider store={store}>
         <Container text style={{ marginTop: '1em' }}>
           <New />
-          <Header as='h1'>Semantic UI React Fixed Template</Header>
-          <p>This is a base react app using Semantic UI.</p>
-          <pre>{JSON.stringify(this.props)}</pre>
         </Container>
       </Provider>
     );

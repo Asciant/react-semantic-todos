@@ -3,7 +3,10 @@ import { Form, Input } from 'semantic-ui-react'
 
 import { bindActionCreators } from "redux"
 import { connect } from "react-redux"
-import * as actionCreators from './actions/todo'
+
+import * as actionCreators from '../actions/todo'
+
+import List from './List'
 
 class New extends Component {
   constructor(props) {
@@ -43,9 +46,11 @@ class New extends Component {
             value={this.state.todo}
           />
         </form>
+
         <ul>
-          {todos.map(d => <li>{d.todo}</li>)}
+          {todos.map((d, i) => <List key={btoa(Math.random()).substring(0,12)} todo={d.todo} />)}
         </ul>
+
       </div>
     )
   }
