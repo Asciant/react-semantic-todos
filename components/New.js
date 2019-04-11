@@ -1,12 +1,16 @@
 import React, { Component } from "react"
-import { Form, Input } from 'semantic-ui-react'
+import { Form, Input, List, Image } from 'semantic-ui-react'
+
+import * as icon from 'identicon.js'
+import * as md5 from 'md5.js'
+import { format } from 'date-fns'
 
 import { bindActionCreators } from "redux"
 import { connect } from "react-redux"
 
 import * as actionCreators from '../actions/todo'
 
-import List from './List'
+import ListItem from './ListItem'
 
 class New extends Component {
   constructor(props) {
@@ -47,9 +51,21 @@ class New extends Component {
           />
         </form>
 
-        <ul>
-          {todos.map((d, i) => <List key={btoa(Math.random()).substring(0,12)} todo={d.todo} />)}
-        </ul>
+        <List divided verticalAlign='middle'>
+            {todos.map((d, i) => {
+              return (
+                <List.Item>
+                  <Image avatar src={`data:image/svg+xml;base64,${new icon.default(new md5.default().update(btoa(Math.random()).substring(0,25)).digest('hex'), {size: 64, format: 'svg'}).toString()}`} key={btoa(Math.random()).substring(0,12)} />
+                  <List.Content>
+                    <List.Header as='a'>
+                      <ListItem key={btoa(Math.random()).substring(0,12)} todo={d.todo} />
+                    </List.Header>
+                    Created {format(new Date(), 'YYYY-MM-DD')}
+                  </List.Content>
+                </List.Item>
+              )
+            })}
+        </List>
 
       </div>
     )
