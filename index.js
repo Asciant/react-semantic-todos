@@ -23,6 +23,7 @@ class App extends Component {
           <New />
           <Header as='h1'>Semantic UI React Fixed Template</Header>
           <p>This is a base react app using Semantic UI.</p>
+          <pre>{JSON.stringify(this.props)}</pre>
         </Container>
       </Provider>
     );

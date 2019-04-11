@@ -6,17 +6,25 @@ import { connect } from "react-redux"
 import * as actionCreators from './actions/todo'
 
 class New extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleChange = (e, { name, value }) => console.log(this.props)
+  handleChange = (e, { name, value }) => this.setState({[name]: value})
+
+  handleSubmit = (e) => {	
+    e.preventDefault()
+    console.log(this.props)
+    this.props.addTodo(this.state.todo)
+  }
 
   render() {
     return (
       <div>
-          <Form.Input 
+        <form ref="todoForm" onSubmit={this.handleSubmit}>
+          <Input 
             size='large' 
             fluid 
             focus 
@@ -24,6 +32,7 @@ class New extends Component {
             name="todo" 
             onChange={this.handleChange} 
           />
+        </form>
         <pre>{JSON.stringify(this.props)}</pre>
       </div>
     )
@@ -32,7 +41,7 @@ class New extends Component {
 
 function mapStateToProps(state) {
   return {
-    todos: state.todos,
+    todos: state,
   }
 }
 
