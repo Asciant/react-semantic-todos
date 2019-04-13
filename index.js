@@ -9,7 +9,7 @@ import {
   } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 
-import New from './components/New'
+import Todos from './components/Todos'
 
 class App extends Component {
   constructor() {
@@ -20,7 +20,7 @@ class App extends Component {
     return (
       <Provider store={store}>
         <Container text style={{ marginTop: '1em' }}>
-          <New />
+          <Todos />
         </Container>
       </Provider>
     );

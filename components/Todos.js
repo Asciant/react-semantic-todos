@@ -1,8 +1,6 @@
 import React, { Component } from "react"
 import { Form, Input, List, Image } from 'semantic-ui-react'
 
-import * as icon from 'identicon.js'
-import * as md5 from 'md5.js'
 import { distanceInWordsToNow } from 'date-fns'
 
 import { bindActionCreators } from "redux"
@@ -10,13 +8,13 @@ import { connect } from "react-redux"
 
 import * as actionCreators from '../actions/todo'
 
-class New extends Component {
+class Todos extends Component {
   constructor(props) {
     super(props)
 
     // React state
     this.state = {
-      todo: ''
+      task: ''
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -27,9 +25,8 @@ class New extends Component {
 
   handleSubmit = (e) => {	
     e.preventDefault()
-    console.log(this.props)
-    this.props.addTodo(this.state.todo)
-    this.setState({todo: ''})
+    this.props.addTodo(this.state.task)
+    this.setState({task: ''})
   }
 
   render() {
@@ -45,7 +42,7 @@ class New extends Component {
             placeholder='I need to do....' 
             name="todo" 
             onChange={this.handleChange} 
-            value={this.state.todo}
+            value={this.state.task}
           />
         </form>
 
@@ -58,7 +55,7 @@ class New extends Component {
                     <List.Header as='a'>
                       {d.task}
                     </List.Header>
-                    Created {distanceInWordsToNow(d.date, {includeSeconds: true})}
+                    Created {distanceInWordsToNow(d.date, {includeSeconds: true}) ago}
                   </List.Content>
                 </List.Item>
               )
@@ -80,4 +77,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(actionCreators, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(New)
+export default connect(mapStateToProps, mapDispatchToProps)(Todos)
