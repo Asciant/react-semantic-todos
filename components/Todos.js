@@ -46,7 +46,7 @@ class Todos extends Component {
           />
         </form>
 
-        <List divided verticalAlign='middle'>
+        <List relaxed verticalAlign='middle'>
             {todos.map((d, i) => {
               return (
                 <List.Item key={d.key}>
