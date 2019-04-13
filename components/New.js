@@ -3,14 +3,12 @@ import { Form, Input, List, Image } from 'semantic-ui-react'
 
 import * as icon from 'identicon.js'
 import * as md5 from 'md5.js'
-import { format } from 'date-fns'
+import { distanceInWordsToNow } from 'date-fns'
 
 import { bindActionCreators } from "redux"
 import { connect } from "react-redux"
 
 import * as actionCreators from '../actions/todo'
-
-import ListItem from './ListItem'
 
 class New extends Component {
   constructor(props) {
@@ -54,13 +52,13 @@ class New extends Component {
         <List divided verticalAlign='middle'>
             {todos.map((d, i) => {
               return (
-                <List.Item>
-                  <Image avatar src={`data:image/svg+xml;base64,${new icon.default(new md5.default().update(btoa(Math.random()).substring(0,25)).digest('hex'), {size: 64, format: 'svg'}).toString()}`} key={btoa(Math.random()).substring(0,12)} />
+                <List.Item key={d.key}>
+                  <Image avatar src={`data:image/svg+xml;base64,${d.icon}`} />
                   <List.Content>
                     <List.Header as='a'>
-                      <ListItem key={btoa(Math.random()).substring(0,12)} todo={d.todo} />
+                      {d.task}
                     </List.Header>
-                    Created {format(new Date(), 'YYYY-MM-DD')}
+                    Created {distanceInWordsToNow(d.date, {includeSeconds: true})}
                   </List.Content>
                 </List.Item>
               )

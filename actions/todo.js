@@ -1,8 +1,8 @@
 
-export function addTodo(todo) {
+export function addTodo(task) {
   return {
     type: "ADD_TODO",
-    todo
+    task
   }
 }
 
