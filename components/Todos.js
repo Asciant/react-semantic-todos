@@ -40,7 +40,7 @@ class Todos extends Component {
             fluid 
             focus 
             placeholder='I need to do....' 
-            name="todo" 
+            name="task" 
             onChange={this.handleChange} 
             value={this.state.task}
           />
@@ -55,7 +55,7 @@ class Todos extends Component {
                     <List.Header as='a'>
                       {d.task}
                     </List.Header>
-                    Created {distanceInWordsToNow(d.date, {includeSeconds: true}) ago}
+                    Created {distanceInWordsToNow(d.date, {includeSeconds: true})} ago
                   </List.Content>
                 </List.Item>
               )
@@ -67,14 +67,4 @@ class Todos extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    todos: state,
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(actionCreators, dispatch)
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Todos)
+export default Todos

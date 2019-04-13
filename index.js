@@ -9,7 +9,7 @@ import {
   } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 
-import Todos from './components/Todos'
+import Todos from './containers/App'
 
 class App extends Component {
   constructor() {
